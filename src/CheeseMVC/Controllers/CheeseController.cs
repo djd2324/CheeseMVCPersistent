@@ -17,7 +17,7 @@ namespace CheeseMVC.Controllers
             context = dbContext;
         }
 
-        // GET: /<controller>/
+        
         public IActionResult Index()
         {
             IList<Cheese> cheeses = context.Cheeses.Include(c => c.Category).ToList();
@@ -38,8 +38,7 @@ namespace CheeseMVC.Controllers
             {
                 CheeseCategory newCheeseCategory =
                     context.Categories.Single(c => c.ID == addCheeseViewModel.CategoryID);
-
-                // Add the new cheese to my existing cheeses
+               
                 Cheese newCheese = new Cheese
                 {
                     Name = addCheeseViewModel.Name,

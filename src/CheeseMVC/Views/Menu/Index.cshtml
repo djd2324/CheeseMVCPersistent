@@ -1,10 +1,10 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-<h3><a asp-controller="Menu" asp-action="Add">Add</a></h3>
+<h2>Menus</h2>
+
+
 <ul>
     @foreach (var menu in ViewBag.menus)
     {
@@ -15,3 +15,5 @@
         </li>
     }
 </ul>
+
+<p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
