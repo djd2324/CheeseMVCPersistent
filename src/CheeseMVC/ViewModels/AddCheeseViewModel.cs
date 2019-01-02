@@ -1,5 +1,4 @@
-﻿
-using CheeseMVC.Models;
+﻿using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

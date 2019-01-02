@@ -24,13 +24,15 @@ namespace CheeseMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryID");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Type");
-
                     b.HasKey("ID");
+
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Cheeses");
                 });
@@ -46,6 +48,53 @@ namespace CheeseMVC.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.CheeseMenu", b =>
+                {
+                    b.Property<int>("CheeseID");
+
+                    b.Property<int>("MenuID");
+
+                    b.HasKey("CheeseID", "MenuID");
+
+                    b.HasIndex("MenuID");
+
+                    b.ToTable("CheeseMenus");
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.Menu", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.Cheese", b =>
+                {
+                    b.HasOne("CheeseMVC.Models.CheeseCategory", "Category")
+                        .WithMany("Cheeses")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.CheeseMenu", b =>
+                {
+                    b.HasOne("CheeseMVC.Models.Cheese", "Cheese")
+                        .WithMany("CheeseMenus")
+                        .HasForeignKey("CheeseID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CheeseMVC.Models.Menu", "Menu")
+                        .WithMany("CheeseMenus")
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
